@@ -6,7 +6,7 @@ import { ScheduleCard } from './ScheduleCard'
 function ScheduleHeader() {
   return (
     <div className="flex justify-between items-center p-4">
-      <div className="pl-12">
+      <div className="pl-4">
         <div className="text-sm font-medium text-[#101010]">
           14th February, 2025
         </div>

@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   darkMode: ['class'],
@@ -11,6 +11,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        inter: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        crimson: ['var(--font-crimson-text)', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -81,5 +83,5 @@ const config: Config = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-};
-export default config;
+}
+export default config

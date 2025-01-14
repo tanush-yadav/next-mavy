@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { PenLine } from "lucide-react";
-import { EventCard } from "./EventCard";
+import { PenLine } from 'lucide-react'
+import { EventCard } from './EventCard'
 
 export function EventSetup() {
   return (
@@ -9,10 +9,10 @@ export function EventSetup() {
       <div className="opacity-50 text-black text-base font-medium">
         Getting started with Mavy
       </div>
-      <h1 className="opacity-90 text-black text-2xl font-semibold mt-2">
+      <h1 className="opacity-90 text-black text-2xl font-semibold mt-2 font-crimson">
         What kind of event do you want to setup
       </h1>
-      
+
       {/* Progress Bar */}
       <div className="mt-4 relative h-2">
         <div className="w-full h-2 opacity-50 bg-black/10 rounded-[49px]" />
@@ -23,7 +23,7 @@ export function EventSetup() {
       <div className="mt-8 grid grid-cols-2 gap-6">
         <EventCard title="Demo call with Mavy" image="/demo-call.jpg" />
         <EventCard title="Interview with candidate" image="/interview.jpg" />
-        <EventCard title="Daily sync" image="/daily-sync.jpg" />
+        <EventCard title="Daily sync" image="/daily-sync.png" />
         <EventCard title="Sales call" image="/sales-call.jpg" />
       </div>
 
@@ -35,5 +35,5 @@ export function EventSetup() {
         </span>
       </button>
     </div>
-  );
+  )
 }
