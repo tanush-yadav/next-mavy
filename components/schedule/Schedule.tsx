@@ -10,7 +10,17 @@ function ScheduleHeader() {
         <div className="text-sm font-medium text-[#101010]">
           14th February, 2025
         </div>
-        <div className="text-xl font-semibold text-black">Today's schedule</div>
+        <div
+          className="text-xl font-semibold font-crimson"
+          style={{
+            background: 'linear-gradient(to right, #000000, #56ABFF)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          Today's schedule
+        </div>
       </div>
       <div className="relative w-[130px] h-[121px]">
         <Image
