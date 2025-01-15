@@ -25,14 +25,18 @@ export function ScheduleCard({
       <div className="grow flex flex-col gap-1.5">
         <div
           className={`${
-            isActive ? 'text-background opacity-90' : 'text-foreground opacity-70'
+            isActive
+              ? 'text-background dark:text-white opacity-90'
+              : 'text-foreground opacity-70'
           } text-base font-medium`}
         >
           {title}
         </div>
         <div
           className={`${
-            isActive ? 'text-background opacity-60' : 'text-foreground opacity-50'
+            isActive
+              ? 'text-background dark:text-white opacity-60'
+              : 'text-foreground opacity-50'
           } text-sm font-medium`}
         >
           {time}

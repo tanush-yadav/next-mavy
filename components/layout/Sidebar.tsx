@@ -16,6 +16,8 @@ interface NavItemProps {
 }
 
 function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
+  const { theme } = useTheme()
+
   // Decide which icon component to render
   const IconComponent = (() => {
     switch (icon) {
@@ -30,19 +32,25 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
     }
   })()
 
+  // Use #FFFFFF for dark mode, otherwise use the original logic
+  const iconColor =
+    theme === 'dark'
+      ? '#FFFFFF'
+      : active
+      ? 'hsl(var(--primary-blue))'
+      : 'currentColor'
+
   return (
     <button
       onClick={onClick}
       className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
     >
-      <IconComponent
-        color={active ? 'hsl(var(--primary-blue))' : 'currentColor'}
-      />
+      <IconComponent color={iconColor} />
       <span
         className={`text-base font-inter ${
           active
-            ? 'font-semibold text-primary-blue'
-            : 'font-medium text-foreground'
+            ? 'font-semibold text-primary-blue dark:text-white'
+            : 'font-medium text-foreground dark:text-white'
         }`}
       >
         {text}

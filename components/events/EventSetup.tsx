@@ -44,7 +44,7 @@ export function EventSetup() {
           transition-colors
         "
       >
-        <PencilIcon className="opacity-90" />
+        <PencilIcon className="opacity-90" color="currentColor" />
         <span className="text-foreground/90 text-base font-medium">
           Write your own
         </span>
