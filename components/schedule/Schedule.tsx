@@ -68,6 +68,10 @@ export function Schedule() {
           <div className="pl-16">
             <ScheduleCard title="Shubham <> Steven" time="4:00PM - 4:30PM" />
           </div>
+
+          <div className="pl-16">
+            <ScheduleCard title="Shubham <> Steven" time="4:00PM - 4:30PM" />
+          </div>
         </div>
       </div>
     </div>
