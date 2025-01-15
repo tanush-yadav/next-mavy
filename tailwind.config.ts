@@ -38,6 +38,12 @@ const config: Config = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          light: 'hsl(var(--primary-light))',
+          blue: 'hsl(var(--primary-blue))',
+          'blue-light': 'hsl(var(--primary-blue-light))',
+        },
+        sidebar: {
+          bg: 'hsl(var(--sidebar-bg))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',

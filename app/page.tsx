@@ -6,7 +6,7 @@ import { Schedule } from "@/components/schedule/Schedule";
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-[#f6f6f6]">
+    <div className="min-h-screen bg-primary-light">
       <Sidebar />
       <div className="pl-[219px] min-h-screen">
         <div className="max-w-[1280px] mx-auto p-8">

@@ -1,6 +1,7 @@
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { Crimson_Text, Inter } from 'next/font/google'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,8 +25,18 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${GeistSans.className} ${inter.variable} ${crimsonText.variable}`}
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

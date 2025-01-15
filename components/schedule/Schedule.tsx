@@ -7,18 +7,10 @@ function ScheduleHeader() {
   return (
     <div className="flex justify-between items-center p-4">
       <div className="pl-4">
-        <div className="text-sm font-medium text-[#101010]">
+        <div className="text-sm font-medium text-foreground/90">
           14th February, 2025
         </div>
-        <div
-          className="text-xl font-semibold font-crimson"
-          style={{
-            background: 'linear-gradient(to right, #000000, #56ABFF)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
+        <div className="text-xl font-semibold font-crimson bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent">
           Today's schedule
         </div>
       </div>
@@ -37,16 +29,16 @@ function ScheduleHeader() {
 
 export function Schedule() {
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] h-full">
+    <div className="bg-background rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] h-full">
       <ScheduleHeader />
       <div className="relative px-4 pb-4">
         {/* Timeline Indicator */}
-        <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-white via-[#007FFF] to-white" />
+        <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-background via-primary-blue to-background" />
 
         {/* Events List */}
         <div className="space-y-4">
           <div className="relative">
-            <div className="absolute left-[20px] top-1/2 -translate-y-1/2 w-7 h-[71px] bg-[#3181db] rounded-[9px] overflow-hidden"></div>
+            <div className="absolute left-[20px] top-1/2 -translate-y-1/2 w-7 h-[71px] bg-primary-blue rounded-[9px] overflow-hidden"></div>
 
             <div className="pl-16">
               <ScheduleCard

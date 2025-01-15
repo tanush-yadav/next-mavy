@@ -5,17 +5,17 @@ import { EventCard } from './EventCard'
 
 export function EventSetup() {
   return (
-    <div className="bg-white rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
-      <div className="opacity-50 text-black text-base font-medium">
+    <div className="bg-background rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
+      <div className="text-foreground/50 text-base font-medium">
         Getting started with Mavy
       </div>
-      <h1 className="opacity-90 text-black text-2xl font-semibold mt-2 font-crimson tracking-tight">
+      <h1 className="text-foreground/90 text-2xl font-semibold mt-2 font-crimson tracking-tight">
         What kind of event do you want to setup
       </h1>
 
       {/* Progress Bar */}
       <div className="mt-4 relative h-2">
-        <div className="w-full h-2 opacity-50 bg-black/10 rounded-[49px]" />
+        <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
         <div className="w-[27px] h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px]" />
       </div>
 
@@ -33,19 +33,19 @@ export function EventSetup() {
           mt-8
           w-full
           p-3
-          bg-neutral-100
+          bg-primary-light
           rounded-md
           border
-          border-neutral-200
+          border-border
           flex
           items-center
           gap-3
-          hover:bg-neutral-50
+          hover:bg-primary-light/80
           transition-colors
         "
       >
-        <PencilIcon className="w-6 h-6 opacity-90" />
-        <span className="opacity-90 text-black text-base font-medium">
+        <PencilIcon className="opacity-90" />
+        <span className="text-foreground/90 text-base font-medium">
           Write your own
         </span>
       </button>

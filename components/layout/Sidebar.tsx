@@ -4,6 +4,8 @@ import { CalendarIcon } from '@/components/icons/CalendarIcon'
 import { ConfigIcon } from '@/components/icons/ConfigIcon'
 import { HomeIcon } from '@/components/icons/HomeIcon'
 import { NetworkIcon } from '@/components/icons/NetworkIcon'
+import { useTheme } from 'next-themes'
+import { Moon, Sun } from 'lucide-react'
 import { useState } from 'react'
 
 interface NavItemProps {
@@ -33,10 +35,10 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
       onClick={onClick}
       className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
     >
-      <IconComponent color={active ? '#1575D2' : '#000000'} />
+      <IconComponent color={active ? 'hsl(var(--primary-blue))' : 'currentColor'} />
       <span
         className={`text-base font-inter ${
-          active ? 'font-semibold text-[#1575D2]' : 'font-medium text-black'
+          active ? 'font-semibold text-primary-blue' : 'font-medium text-foreground'
         }`}
       >
         {text}
@@ -47,6 +49,7 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
 
 export function Sidebar() {
   const [activeNav, setActiveNav] = useState('Home')
+  const { theme, setTheme } = useTheme()
 
   const navItems = [
     { icon: 'home', text: 'Home' },
@@ -56,8 +59,8 @@ export function Sidebar() {
   ]
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-[219px] bg-[#e2e7eb] shadow-sm flex flex-col">
-      <div className="pl-10 pr-[70px] pt-10 flex flex-col gap-[60px]">
+    <div className="fixed left-0 top-0 h-screen w-[219px] bg-sidebar-bg shadow-sm flex flex-col">
+      <div className="pl-10 pr-[70px] pt-10 flex flex-col gap-[60px] h-full">
         {/* Navigation */}
         <div className="flex flex-col gap-4">
           {navItems.map((item) => (
@@ -70,6 +73,21 @@ export function Sidebar() {
             />
           ))}
         </div>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="mt-auto mb-8 flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
+        >
+          {theme === 'dark' ? (
+            <Sun className="h-5 w-5" />
+          ) : (
+            <Moon className="h-5 w-5" />
+          )}
+          <span className="text-sm font-medium text-foreground">
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          </span>
+        </button>
       </div>
     </div>
   )
