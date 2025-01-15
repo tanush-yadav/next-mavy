@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { Sidebar } from "@/components/layout/Sidebar";
-import { EventSetup } from "@/components/events/EventSetup";
-import { Schedule } from "@/components/schedule/Schedule";
+import { EventSetup } from '@/components/events/EventSetup'
+import { Sidebar } from '@/components/layout/Sidebar'
+import { Schedule } from '@/components/schedule/Schedule'
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-primary-light">
+    <div className="min-h-screen bg-background">
       <Sidebar />
       <div className="pl-[219px] min-h-screen">
         <div className="max-w-[1280px] mx-auto p-8">
@@ -21,5 +21,5 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-  );
+  )
 }

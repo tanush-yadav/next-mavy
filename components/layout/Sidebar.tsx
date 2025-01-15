@@ -4,8 +4,8 @@ import { CalendarIcon } from '@/components/icons/CalendarIcon'
 import { ConfigIcon } from '@/components/icons/ConfigIcon'
 import { HomeIcon } from '@/components/icons/HomeIcon'
 import { NetworkIcon } from '@/components/icons/NetworkIcon'
-import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { useState } from 'react'
 
 interface NavItemProps {
@@ -35,10 +35,14 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
       onClick={onClick}
       className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
     >
-      <IconComponent color={active ? 'hsl(var(--primary-blue))' : 'currentColor'} />
+      <IconComponent
+        color={active ? 'hsl(var(--primary-blue))' : 'currentColor'}
+      />
       <span
         className={`text-base font-inter ${
-          active ? 'font-semibold text-primary-blue' : 'font-medium text-foreground'
+          active
+            ? 'font-semibold text-primary-blue'
+            : 'font-medium text-foreground'
         }`}
       >
         {text}

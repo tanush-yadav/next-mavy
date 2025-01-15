@@ -5,7 +5,7 @@ import { EventCard } from './EventCard'
 
 export function EventSetup() {
   return (
-    <div className="bg-background rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
+    <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
       <div className="text-foreground/50 text-base font-medium">
         Getting started with Mavy
       </div>

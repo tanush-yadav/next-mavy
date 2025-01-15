@@ -5,8 +5,8 @@ import { ScheduleCard } from './ScheduleCard'
 
 function ScheduleHeader() {
   return (
-    <div className="flex justify-between items-center p-4">
-      <div className="pl-4">
+    <div className="flex justify-between items-center px-4 py-1">
+      <div className="px-4">
         <div className="text-sm font-medium text-foreground/90">
           14th February, 2025
         </div>
@@ -14,7 +14,7 @@ function ScheduleHeader() {
           Today's schedule
         </div>
       </div>
-      <div className="relative w-[130px] h-[121px]">
+      <div className="relative w-1/2">
         <Image
           src="/calendar-icon.png"
           alt="Calendar"
@@ -29,7 +29,7 @@ function ScheduleHeader() {
 
 export function Schedule() {
   return (
-    <div className="bg-background rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] h-full">
+    <div className="bg-card rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
       <ScheduleHeader />
       <div className="relative px-4 pb-4">
         {/* Timeline Indicator */}
