@@ -4,11 +4,7 @@ import type { Metadata } from 'next'
 import { Crimson_Text, Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
-
+const inter = Inter({ subsets: ['latin'] })
 const crimsonText = Crimson_Text({
   weight: ['400', '600', '700'],
   subsets: ['latin'],
@@ -28,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.className} ${inter.className} ${crimsonText.className}`}
+      className={`${GeistSans.className} ${inter.variable} ${crimsonText.variable}`}
       suppressHydrationWarning
     >
       <body>
