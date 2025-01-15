@@ -41,11 +41,17 @@ export function EventSetup() {
           items-center
           gap-3
           hover:bg-primary-light/80
-          transition-colors
+          transition-all
+          duration-200
+          group
+          dark:hover:bg-primary-light/20
         "
       >
-        <PencilIcon className="opacity-90" color="currentColor" />
-        <span className="text-foreground/90 text-base font-medium">
+        <PencilIcon
+          className="opacity-90 transition-opacity group-hover:opacity-100"
+          color="currentColor"
+        />
+        <span className="text-foreground/90 text-base font-medium group-hover:text-foreground transition-colors">
           Write your own
         </span>
       </button>
