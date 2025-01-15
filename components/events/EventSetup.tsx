@@ -1,15 +1,15 @@
 'use client'
 
-import { PenLine } from 'lucide-react'
+import { PencilIcon } from '@/components/icons/PencilIcon'
 import { EventCard } from './EventCard'
 
 export function EventSetup() {
   return (
-    <div className="bg-white rounded-xl p-7 h-full">
+    <div className="bg-white rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
       <div className="opacity-50 text-black text-base font-medium">
         Getting started with Mavy
       </div>
-      <h1 className="opacity-90 text-black text-2xl font-semibold mt-2 font-crimson">
+      <h1 className="opacity-90 text-black text-2xl font-semibold mt-2 font-crimson tracking-tight">
         What kind of event do you want to setup
       </h1>
 
@@ -28,8 +28,23 @@ export function EventSetup() {
       </div>
 
       {/* Write Your Own Button */}
-      <button className="mt-8 w-full p-3 bg-neutral-100 rounded-lg border border-neutral-200 flex items-center gap-3 hover:bg-neutral-50 transition-colors">
-        <PenLine className="w-6 h-6 opacity-90" />
+      <button
+        className="
+          mt-8
+          w-full
+          p-3
+          bg-neutral-100
+          rounded-md
+          border
+          border-neutral-200
+          flex
+          items-center
+          gap-3
+          hover:bg-neutral-50
+          transition-colors
+        "
+      >
+        <PencilIcon className="w-6 h-6 opacity-90" />
         <span className="opacity-90 text-black text-base font-medium">
           Write your own
         </span>

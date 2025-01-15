@@ -37,16 +37,16 @@ function ScheduleHeader() {
 
 export function Schedule() {
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_33.2px_0px_rgba(0,0,0,0.05)] h-full">
+    <div className="bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] h-full">
       <ScheduleHeader />
       <div className="relative px-4 pb-4">
         {/* Timeline Indicator */}
-        <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-white via-[#007fff] to-white" />
+        <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-white via-[#007FFF] to-white" />
 
         {/* Events List */}
         <div className="space-y-4">
           <div className="relative">
-            <div className="absolute left-[20px] top-1/2 -translate-y-1/2 w-7 h-[71px] bg-[#3181db] rounded-[9px] opacity-20"></div>
+            <div className="absolute left-[20px] top-1/2 -translate-y-1/2 w-7 h-[71px] bg-[#3181db] rounded-[9px] overflow-hidden"></div>
 
             <div className="pl-16">
               <ScheduleCard
@@ -59,6 +59,10 @@ export function Schedule() {
 
           <div className="pl-16">
             <ScheduleCard title="Shubham <> Saurabh" time="4:00PM - 4:30PM" />
+          </div>
+
+          <div className="pl-16">
+            <ScheduleCard title="Shubham <> Steven" time="4:00PM - 4:30PM" />
           </div>
 
           <div className="pl-16">
