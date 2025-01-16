@@ -23,76 +23,50 @@ interface EventEmailProps {
 export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   const [emailTags, setEmailTags] = useState<EmailTag[]>([])
   const [inputValue, setInputValue] = useState('')
-
-  // Add CC as an editable field
-  const [ccValue, setCcValue] = useState(emailData.cc)
-
   const [step, setStep] = useState<'initial' | 'compose' | 'message' | 'final'>(
     'initial'
   )
   const [subject, setSubject] = useState(emailData.subject)
   const [message, setMessage] = useState(emailData.message)
 
-  /* Refs for auto-focus */
+  /* Refs to auto-focus fields */
   const toInputRef = useRef<HTMLInputElement>(null)
-  const ccInputRef = useRef<HTMLInputElement>(null)
   const subjectRef = useRef<HTMLInputElement>(null)
   const messageRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
-    // Auto-focus logic based on current step:
+    // Auto-focus logic based on step:
     if (step === 'initial') {
       toInputRef.current?.focus()
     } else if (step === 'compose') {
-      // Focus CC field at the end of the current value
-      ccInputRef.current?.focus()
-      // Place caret at the end of prefilled text
-      setTimeout(() => {
-        ccInputRef.current?.setSelectionRange(ccValue.length, ccValue.length)
-      }, 0)
+      // If you want an actual CC input, focus it here. Currently, we only show a text, so skip focusing.
     } else if (step === 'message') {
       subjectRef.current?.focus()
     }
-  }, [step, ccValue.length])
+  }, [step])
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-        // Handle send email with CMD/CTRL + Enter
-        console.log('Sending email (CMD+Enter)...')
+        // Handle send email
+        console.log('Sending email...')
       }
     }
+
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [])
 
-  // Prevent going to the next step if required fields are empty:
-  const canGoNext = () => {
-    switch (step) {
-      case 'initial':
-        // Must have at least one "To" email
-        return emailTags.length > 0
-      case 'compose':
-        // Must have CC filled
-        return ccValue.trim().length > 0
-      case 'message':
-        // Must have subject and message
-        return subject.trim().length > 0 && message.trim().length > 0
-      default:
-        return true
-    }
-  }
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue.trim()) {
       e.preventDefault()
-      const newTag: EmailTag = {
+      const newTag = {
         email: inputValue.trim(),
         id: Math.random().toString(36).substr(2, 9),
       }
       setEmailTags([...emailTags, newTag])
       setInputValue('')
-      // Move to next step automatically, or require manual "Next" – up to you:
+      // Once user fills the 'To' field, let them proceed to next step
       setStep('compose')
     }
   }
@@ -102,8 +76,9 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   }
 
   const handleNext = () => {
-    if (!canGoNext()) return // Just double-check
     if (step === 'initial') {
+      // If you want user to explicitly click next after they've entered an email, you can do so.
+      // Or automatically move forward in handleKeyDown. This code follows your step logic manually:
       setStep('compose')
     } else if (step === 'compose') {
       setStep('message')
@@ -156,7 +131,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
 
   return (
     <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
-      {/* Top Navigation (Hide at final) */}
+      {/* Navigation */}
       {step !== 'final' && (
         <div className="flex justify-between items-center mb-6">
           <button
@@ -169,8 +144,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
           {step !== 'message' && (
             <button
               onClick={handleNext}
-              disabled={!canGoNext()}
-              className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors"
             >
               <span className="text-sm">Next</span>
               <ArrowRight className="h-4 w-4" />
@@ -227,17 +201,10 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
           </div>
         </div>
 
-        {/* CC Field (Now an editable input) */}
+        {/* CC Field (Pre-filled) */}
         <div className="flex items-center gap-3 mb-3">
           <div className="text-foreground/60 text-sm">CC</div>
-          <input
-            ref={ccInputRef}
-            type="text"
-            className="flex-1 bg-transparent text-sm text-foreground focus:outline-none"
-            value={ccValue}
-            onChange={(e) => setCcValue(e.target.value)}
-            readOnly={step === 'final'}
-          />
+          <div className="px-1 text-sm text-foreground">{emailData.cc}</div>
         </div>
 
         {/* Subject Field */}
@@ -266,13 +233,9 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
         </div>
       </div>
 
-      {/* Send Email Button + Keyboard Shortcut */}
+      {/* Send Email Button and Keyboard Shortcut */}
       <div className="mt-6 flex flex-col items-center gap-3">
         <button
-          disabled={!canGoNext()}
-          onClick={() =>
-            step !== 'final' ? handleNext() : console.log('Sending email...')
-          }
           className="
             w-[248px]
             py-3
@@ -293,10 +256,12 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
             items-center
             justify-center
             gap-2
-            disabled:opacity-50
           "
+          onClick={() =>
+            step !== 'final' ? handleNext() : console.log('Sending email...')
+          }
         >
-          <span>{step !== 'final' ? 'Next' : 'Send email'}</span>
+          <span>Send email</span>
         </button>
 
         {step === 'final' && (
