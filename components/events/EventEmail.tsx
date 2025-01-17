@@ -4,6 +4,7 @@ import { mockContacts } from '@/lib/data/mockContacts'
 import { ArrowLeft, ArrowRight, Command } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { EmailCombobox } from './EmailCombobox'
+import { RedirectOverlay } from './RedirectOverlay'
 
 interface EmailData {
   subject: string
@@ -31,6 +32,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   )
   const [subject, setSubject] = useState(emailData.subject)
   const [message, setMessage] = useState(emailData.message)
+  const [showRedirect, setShowRedirect] = useState(false)
 
   /* Refs to auto-focus fields */
   const toInputRef = useRef<HTMLInputElement>(null)
@@ -43,7 +45,6 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
     if (step === 'initial') {
       toInputRef.current?.focus()
     } else if (step === 'compose') {
-      // If you want an actual CC input, focus it here. Currently, we only show a text, so skip focusing.
       ccInputRef.current?.focus()
     } else if (step === 'message') {
       subjectRef.current?.focus()
@@ -53,8 +54,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-        // Handle send email
-        console.log('Sending email...')
+        handleSendEmail()
       }
     }
 
@@ -80,10 +80,23 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
     setEmailTags(emailTags.filter((tag) => tag.id !== id))
   }
 
+  const canProceed = () => {
+    switch (step) {
+      case 'initial':
+        return emailTags.length > 0
+      case 'compose':
+        return ccValue.trim().length > 0
+      case 'message':
+        return subject.trim().length > 0 && message.trim().length > 0
+      default:
+        return true
+    }
+  }
+
   const handleNext = () => {
+    if (!canProceed()) return
+
     if (step === 'initial') {
-      // If you want user to explicitly click next after they've entered an email, you can do so.
-      // Or automatically move forward in handleKeyDown. This code follows your step logic manually:
       setStep('compose')
     } else if (step === 'compose') {
       setStep('message')
@@ -102,6 +115,14 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
     } else {
       onBack()
     }
+  }
+
+  const handleSendEmail = () => {
+    setShowRedirect(true)
+    // Redirect to Gmail after a delay
+    // setTimeout(() => {
+    //   window.location.href = 'https://mail.google.com'
+    // }, 2000)
   }
 
   const getProgressWidth = () => {
@@ -150,169 +171,193 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   }
 
   return (
-    <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
-      {/* Navigation */}
-      {step !== 'final' && (
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm">Back</span>
-          </button>
-          {step !== 'message' && (
+    <>
+      <RedirectOverlay show={showRedirect} />
+      <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
+        {/* Navigation */}
+        {step !== 'final' && (
+          <div className="flex justify-between items-center mb-6">
             <button
-              onClick={handleNext}
+              onClick={handleBack}
               className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors"
             >
-              <span className="text-sm">Next</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" />
+              <span className="text-sm">Back</span>
             </button>
-          )}
-        </div>
-      )}
-
-      <div className="text-foreground/50 text-base font-medium">
-        Getting started with Mavy
-      </div>
-      <h1 className="text-foreground/90 text-2xl font-semibold mt-2 font-crimson tracking-tight">
-        {getHeading()}
-      </h1>
-
-      {/* Progress Bar */}
-      <div className="mt-4 relative h-2">
-        <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
-        <div
-          className={`h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px] transition-all duration-300 ${getProgressWidth()}`}
-        />
-      </div>
-
-      {/* Email Form */}
-      <div className="mt-[18px] px-4 py-3 bg-neutral-100 dark:bg-neutral-900 rounded-lg border border-white/10">
-        {/* To Field */}
-        <div className="flex items-center gap-[18px] mb-3">
-          <div className="text-foreground/60 text-sm">To</div>
-          <div className="flex-1 flex flex-wrap gap-2">
-            {emailTags.map((tag) => (
-              <div
-                key={tag.id}
-                className="flex items-center gap-1 bg-primary-blue/10 dark:bg-primary-blue/20 px-2 py-1 rounded-md"
+            {step !== 'message' && (
+              <button
+                onClick={handleNext}
+                disabled={!canProceed()}
+                className={`flex items-center gap-2 transition-colors ${
+                  canProceed()
+                    ? 'text-foreground/60 hover:text-foreground'
+                    : 'text-foreground/30 cursor-not-allowed'
+                }`}
               >
-                <span className="text-sm text-foreground">{tag.email}</span>
-                <button
-                  onClick={() => removeTag(tag.id)}
-                  className="text-foreground/60 hover:text-foreground"
-                >
-                  ×
-                </button>
-              </div>
-            ))}
-            <EmailCombobox
-              contacts={mockContacts}
-              inputValue={inputValue}
-              onInputChange={setInputValue}
-              onSelect={handleEmailSelect}
-              onKeyDown={handleKeyDown}
-              disabled={step === 'final'}
-              inputRef={toInputRef}
-            />
-          </div>
-        </div>
-
-        {/* CC Field (Pre-filled) */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="text-foreground/60 text-sm">CC</div>
-          <div className="flex-1">
-            <EmailCombobox
-              contacts={mockContacts}
-              inputValue={ccValue}
-              onInputChange={setCcValue}
-              onSelect={handleCcSelect}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && ccValue.trim()) {
-                  e.preventDefault()
-                  setStep('message')
-                }
-              }}
-              disabled={step === 'final'}
-              inputRef={ccInputRef}
-            />
-          </div>
-        </div>
-
-        {/* Subject Field */}
-        <div className="py-1 mb-3">
-          <input
-            ref={subjectRef}
-            type="text"
-            className="w-full bg-transparent text-sm text-foreground focus:outline-none font-medium"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="Subject"
-            readOnly={step === 'final'}
-          />
-        </div>
-
-        {/* Message Field */}
-        <div className="h-[209px]">
-          <textarea
-            ref={messageRef}
-            className="w-full h-full bg-transparent text-sm text-foreground focus:outline-none resize-none"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Write your message"
-            readOnly={step === 'final'}
-          />
-        </div>
-      </div>
-
-      {/* Send Email Button and Keyboard Shortcut */}
-      <div className="mt-6 flex flex-col items-center gap-3">
-        <button
-          className="
-            w-[248px]
-            py-3
-            px-6
-            bg-foreground
-            dark:bg-background
-            text-background
-            dark:text-foreground
-            rounded-full
-            font-semibold
-            transition-all
-            duration-200
-            border
-            border-primary-blue
-            shadow-[0px_0px_4px_4px_rgba(255,255,255,0.15)]
-            hover:opacity-90
-            flex
-            items-center
-            justify-center
-            gap-2
-          "
-          onClick={() =>
-            step !== 'final' ? handleNext() : console.log('Sending email...')
-          }
-        >
-          <span>Send email</span>
-        </button>
-
-        {step === 'final' && (
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-foreground/70 font-medium">hit</span>
-            <div className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 bg-[#e9e9e9] dark:bg-neutral-800 rounded">
-                <Command className="h-3 w-3" />
-              </kbd>
-              <kbd className="px-1 py-0.5 bg-[#e9e9e9] dark:bg-neutral-800 rounded text-[#4d4d4d] dark:text-neutral-400 font-medium">
-                enter
-              </kbd>
-            </div>
-            <span className="text-foreground/70 font-medium">to send</span>
+                <span className="text-sm">Next</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            )}
           </div>
         )}
+
+        <div className="text-foreground/50 text-base font-medium">
+          Getting started with Mavy
+        </div>
+        <h1 className="text-foreground/90 text-2xl font-semibold mt-2 font-crimson tracking-tight">
+          {getHeading()}
+        </h1>
+
+        {/* Progress Bar */}
+        <div className="mt-4 relative h-2">
+          <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
+          <div
+            className={`h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px] transition-all duration-300 ${getProgressWidth()}`}
+          />
+        </div>
+
+        {/* Email Form */}
+        <div className="mt-[18px] px-4 py-3 bg-neutral-100 dark:bg-neutral-900 rounded-lg border border-white/10">
+          {/* To Field */}
+          <div className="flex items-center gap-[18px] mb-3">
+            <div className="text-foreground/60 text-sm">To</div>
+            <div className="flex-1 flex flex-wrap gap-2">
+              {emailTags.map((tag) => (
+                <div
+                  key={tag.id}
+                  className="flex items-center gap-1 bg-primary-blue/10 dark:bg-primary-blue/20 px-2 py-1 rounded-md"
+                >
+                  <span className="text-sm text-foreground">{tag.email}</span>
+                  <button
+                    onClick={() => removeTag(tag.id)}
+                    className="text-foreground/60 hover:text-foreground"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <EmailCombobox
+                contacts={mockContacts}
+                inputValue={inputValue}
+                onInputChange={setInputValue}
+                onSelect={handleEmailSelect}
+                onKeyDown={handleKeyDown}
+                disabled={step === 'final'}
+                inputRef={toInputRef}
+                selectedEmails={emailTags.map(tag => tag.email)}
+              />
+            </div>
+          </div>
+
+          {/* CC Field (Pre-filled) */}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="text-foreground/60 text-sm">CC</div>
+            <div className="flex-1">
+              <EmailCombobox
+                contacts={mockContacts}
+                inputValue={ccValue}
+                onInputChange={setCcValue}
+                onSelect={handleCcSelect}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && ccValue.trim()) {
+                    e.preventDefault()
+                    setStep('message')
+                  }
+                }}
+                disabled={step === 'final'}
+                inputRef={ccInputRef}
+                selectedEmails={[]}
+              />
+            </div>
+          </div>
+
+          {/* Subject Field */}
+          <div className="py-1 mb-3">
+            <input
+              ref={subjectRef}
+              type="text"
+              className="w-full bg-transparent text-sm text-foreground focus:outline-none font-medium"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              placeholder="Subject"
+              readOnly={step === 'final'}
+            />
+          </div>
+
+          {/* Message Field */}
+          <div className="h-[209px]">
+            <textarea
+              ref={messageRef}
+              className="w-full h-full bg-transparent text-sm text-foreground focus:outline-none resize-none"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Write your message"
+              readOnly={step === 'final'}
+            />
+          </div>
+        </div>
+
+        {/* Send Email Button and Keyboard Shortcut */}
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <button
+            disabled={!canProceed()}
+            className={`
+              w-[248px]
+              py-3
+              px-6
+              rounded-full
+              font-semibold
+              transition-all
+              duration-200
+              border
+              border-primary-blue
+              flex
+              items-center
+              justify-center
+              gap-2
+              ${
+                canProceed()
+                  ? `
+                    bg-foreground
+                    dark:bg-background
+                    text-background
+                    dark:text-foreground
+                    shadow-[0px_0px_4px_4px_rgba(255,255,255,0.15)]
+                    hover:opacity-90
+                  `
+                  : `
+                    bg-foreground/50
+                    dark:bg-background/50
+                    text-background/50
+                    dark:text-foreground/50
+                    cursor-not-allowed
+                    border-primary-blue/50
+                  `
+              }
+            `}
+            onClick={() =>
+              step !== 'final' ? handleNext() : handleSendEmail()
+            }
+          >
+            <span>Send email</span>
+          </button>
+
+          {step === 'final' && (
+            <div className="flex items-center gap-2 text-xs">
+              <span className="text-foreground/70 font-medium">hit</span>
+              <div className="flex items-center gap-1">
+                <kbd className="px-1 py-0.5 bg-[#e9e9e9] dark:bg-neutral-800 rounded">
+                  <Command className="h-3 w-3" />
+                </kbd>
+                <kbd className="px-1 py-0.5 bg-[#e9e9e9] dark:bg-neutral-800 rounded text-[#4d4d4d] dark:text-neutral-400 font-medium">
+                  enter
+                </kbd>
+              </div>
+              <span className="text-foreground/70 font-medium">to send</span>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -109,20 +109,20 @@ export function EventSetup() {
       <button
         className="
           mt-8
+          h-12
           w-full
-          p-3
+          px-3
           bg-primary-light
-          rounded-md
-          border
-          border-border
+          dark:bg-neutral-900
+          rounded-lg
           flex
           items-center
           gap-3
           hover:bg-primary-light/80
+          dark:hover:bg-neutral-900/80
           transition-all
           duration-200
           group
-          dark:hover:bg-primary-light/20
         "
         onClick={() => setSelectedEvent('Custom event')}
       >
