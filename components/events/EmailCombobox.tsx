@@ -14,8 +14,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Contact } from '@/lib/data/mockContacts'
-import { cn } from '@/lib/utils'
-import { Check } from 'lucide-react'
 import { useState } from 'react'
 
 interface EmailComboboxProps {
@@ -23,7 +21,7 @@ interface EmailComboboxProps {
   inputValue: string
   onInputChange: (value: string) => void
   onSelect: (email: string) => void
-  onKeyDown: (e: React.KeyboardEvent) => void
+  onKeyDown: (e: React.KeyboardEvent<any>) => void
   disabled?: boolean
   inputRef?: React.RefObject<HTMLInputElement>
   selectedEmails?: string[]
@@ -32,7 +30,7 @@ interface EmailComboboxProps {
 function getInitials(name: string) {
   const nameMatch = name.match(/^([^<]+)/)
   if (!nameMatch) return 'U'
-  
+
   const fullName = nameMatch[1].trim()
   const nameParts = fullName.split(' ')
   if (nameParts.length >= 2) {
@@ -56,7 +54,7 @@ export function EmailCombobox({
   const filteredContacts = contacts.filter((contact) => {
     const emailMatch = contact.label.match(/<(.+)>/)
     const email = emailMatch ? emailMatch[1] : contact.value
-    
+
     return (
       contact.label.toLowerCase().includes(inputValue.toLowerCase()) &&
       !selectedEmails.includes(email)
@@ -78,8 +76,8 @@ export function EmailCombobox({
           disabled={disabled}
         />
       </PopoverTrigger>
-      <PopoverContent 
-        className="w-[356px] p-0 bg-card border border-border shadow-lg" 
+      <PopoverContent
+        className="w-[356px] p-0 bg-card border border-border shadow-lg"
         align="start"
       >
         <Command className="bg-transparent">
@@ -111,7 +109,7 @@ export function EmailCombobox({
                         setOpen(false)
                       }}
                       className="p-2 rounded-lg transition-colors duration-200
-                        data-[highlighted]:bg-primary-blue/10 
+                        data-[highlighted]:bg-primary-blue/10
                         dark:data-[highlighted]:bg-primary-blue/20
                         hover:bg-primary-blue/10
                         dark:hover:bg-primary-blue/20"
