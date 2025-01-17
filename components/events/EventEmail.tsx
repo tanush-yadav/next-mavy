@@ -1,7 +1,9 @@
 'use client'
 
+import { mockContacts } from '@/lib/data/mockContacts'
 import { ArrowLeft, ArrowRight, Command } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { EmailCombobox } from './EmailCombobox'
 
 interface EmailData {
   subject: string
@@ -23,6 +25,7 @@ interface EventEmailProps {
 export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   const [emailTags, setEmailTags] = useState<EmailTag[]>([])
   const [inputValue, setInputValue] = useState('')
+  const [ccValue, setCcValue] = useState(emailData.cc)
   const [step, setStep] = useState<'initial' | 'compose' | 'message' | 'final'>(
     'initial'
   )
@@ -31,6 +34,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
 
   /* Refs to auto-focus fields */
   const toInputRef = useRef<HTMLInputElement>(null)
+  const ccInputRef = useRef<HTMLInputElement>(null)
   const subjectRef = useRef<HTMLInputElement>(null)
   const messageRef = useRef<HTMLTextAreaElement>(null)
 
@@ -40,6 +44,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
       toInputRef.current?.focus()
     } else if (step === 'compose') {
       // If you want an actual CC input, focus it here. Currently, we only show a text, so skip focusing.
+      ccInputRef.current?.focus()
     } else if (step === 'message') {
       subjectRef.current?.focus()
     }
@@ -108,7 +113,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
       case 'message':
         return 'w-[378px]'
       case 'final':
-        return 'w-[512px]'
+        return 'w-full'
       default:
         return 'w-[138px]'
     }
@@ -127,6 +132,21 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
       default:
         return 'Who do you want to meet?'
     }
+  }
+
+  const handleEmailSelect = (email: string) => {
+    const newTag = {
+      email: email,
+      id: Math.random().toString(36).substr(2, 9),
+    }
+    setEmailTags([...emailTags, newTag])
+    setInputValue('')
+    setStep('compose')
+  }
+
+  const handleCcSelect = (email: string) => {
+    setCcValue(email)
+    setStep('message')
   }
 
   return (
@@ -188,15 +208,14 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
                 </button>
               </div>
             ))}
-            <input
-              ref={toInputRef}
-              type="email"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+            <EmailCombobox
+              contacts={mockContacts}
+              inputValue={inputValue}
+              onInputChange={setInputValue}
+              onSelect={handleEmailSelect}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent text-sm text-foreground focus:outline-none min-w-[200px]"
-              placeholder="Enter email addresses"
-              readOnly={step === 'final'}
+              disabled={step === 'final'}
+              inputRef={toInputRef}
             />
           </div>
         </div>
@@ -204,7 +223,22 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
         {/* CC Field (Pre-filled) */}
         <div className="flex items-center gap-3 mb-3">
           <div className="text-foreground/60 text-sm">CC</div>
-          <div className="px-1 text-sm text-foreground">{emailData.cc}</div>
+          <div className="flex-1">
+            <EmailCombobox
+              contacts={mockContacts}
+              inputValue={ccValue}
+              onInputChange={setCcValue}
+              onSelect={handleCcSelect}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && ccValue.trim()) {
+                  e.preventDefault()
+                  setStep('message')
+                }
+              }}
+              disabled={step === 'final'}
+              inputRef={ccInputRef}
+            />
+          </div>
         </div>
 
         {/* Subject Field */}
