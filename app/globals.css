@@ -45,7 +45,7 @@
     --primary-foreground: 0 0% 98%;
     --primary-light: 0 0% 96.1%;
     --primary-blue: 213 82% 45%;
-    --primary-blue-light: 213 82% 95%;
+    --primary-blue-light: 213 82% 75%; /* Darker shade of primary blue */
     --sidebar-bg: 214 14% 91%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;

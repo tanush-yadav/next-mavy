@@ -14,7 +14,7 @@ export function ScheduleCard({
   return (
     <div
       className={`
-        w-full p-4
+        w-[90%] p-4
         ${
           isActive
             ? 'bg-gradient-to-r from-primary-blue to-primary-blue-light'
@@ -52,7 +52,7 @@ export function ScheduleCard({
                 ? 'text-background dark:text-white opacity-60'
                 : 'text-foreground opacity-50'
             }
-            text-sm font-medium
+            text-xs font-semibold
             group-hover:opacity-75 transition-opacity duration-200
           `}
         >
@@ -62,20 +62,17 @@ export function ScheduleCard({
       {isActive && (
         <button
           className="
-            px-4 py-1.5
+            px-3 py-1
             bg-background
             rounded-full
-            shadow-sm
-            hover:shadow-md
             hover:shadow-blue-200/50
             hover:bg-primary-light/90
             active:bg-primary-light
             transition-all duration-200
             focus:outline-none focus:ring-2 focus:ring-primary-blue/20
-            animate-soft-pulse
           "
         >
-          <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent">
+          <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent opacity-90">
             Join now
           </span>
         </button>

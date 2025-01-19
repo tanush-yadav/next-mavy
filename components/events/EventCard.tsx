@@ -36,22 +36,11 @@ export function EventCard({ title, image }: EventCardProps) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           <span className="text-white text-base font-medium leading-tight">
             {title}
           </span>
-          <span
-            className="
-            text-white/80
-            text-lg
-            font-medium
-            transform
-            translate-x-0
-            group-hover:translate-x-1
-            transition-transform
-            duration-200
-          "
-          >
+          <span className="text-white/80 text-lg font-medium ml-2 mt-0.5">
             →
           </span>
         </div>
