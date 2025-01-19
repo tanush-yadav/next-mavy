@@ -173,7 +173,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
   return (
     <>
       <RedirectOverlay show={showRedirect} />
-      <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
+      <div className="bg-card rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-7">
         {/* Navigation */}
         {step !== 'final' && (
           <div className="flex justify-between items-center mb-6">
@@ -244,7 +244,7 @@ export function EventEmail({ eventType, emailData, onBack }: EventEmailProps) {
                 onKeyDown={handleKeyDown}
                 disabled={step === 'final'}
                 inputRef={toInputRef}
-                selectedEmails={emailTags.map(tag => tag.email)}
+                selectedEmails={emailTags.map((tag) => tag.email)}
               />
             </div>
           </div>
