@@ -35,7 +35,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 96.5%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -46,7 +46,7 @@
     --primary-light: 0 0% 96.1%;
     --primary-blue: 213 82% 45%;
     --primary-blue-light: 213 82% 95%;
-    --sidebar-bg: 204 14% 91%;
+    --sidebar-bg: 214 14% 91%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -95,4 +95,20 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes soft-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2s infinite ease-in-out;
 }

@@ -71,13 +71,22 @@ export function EmailCombobox({
           onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={onKeyDown}
           onFocus={() => setOpen(true)}
-          className="flex-1 bg-transparent text-sm text-foreground focus:outline-none min-w-[200px] placeholder:text-muted-foreground"
+          className="
+            flex-1 bg-transparent
+            text-sm text-foreground
+            focus:outline-none focus:ring-2
+            focus:ring-primary-blue/20
+            focus:ring-offset-0
+            min-w-[200px]
+            placeholder:text-muted-foreground
+            transition-all duration-200
+          "
           placeholder="Enter email address..."
           disabled={disabled}
         />
       </PopoverTrigger>
       <PopoverContent
-        className="w-[356px] p-0 bg-card border border-border shadow-lg"
+        className="w-[356px] p-0 bg-card border border-border shadow-lg rounded-xl"
         align="start"
       >
         <Command className="bg-transparent">
@@ -85,7 +94,11 @@ export function EmailCombobox({
             placeholder="Search contacts..."
             value={inputValue}
             onValueChange={onInputChange}
-            className="border-none focus:ring-0 placeholder:text-muted-foreground"
+            className="
+              border-none focus:ring-0
+              placeholder:text-muted-foreground
+              transition-colors duration-200
+            "
           />
           <CommandList>
             <CommandEmpty className="py-2 text-sm text-muted-foreground">
@@ -108,25 +121,41 @@ export function EmailCombobox({
                         onSelect(value)
                         setOpen(false)
                       }}
-                      className="p-2 rounded-lg transition-colors duration-200
+                      className="
+                        p-2 rounded-lg
+                        transition-all duration-200
                         data-[highlighted]:bg-primary-blue/10
                         dark:data-[highlighted]:bg-primary-blue/20
                         hover:bg-primary-blue/10
-                        dark:hover:bg-primary-blue/20"
+                        dark:hover:bg-primary-blue/20
+                        hover:scale-[1.02]
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-primary-blue/20
+                      "
                     >
                       <div className="flex justify-between items-center w-full">
-                        <div className="text-foreground/70 dark:text-foreground/80 text-xs font-normal">
+                        <div className="text-foreground/70 dark:text-foreground/80 text-xs font-medium tracking-wide">
                           {name}
                         </div>
                         <div className="flex items-center gap-1.5">
                           <div className="w-5 h-5 relative">
-                            <div className="w-5 h-5 bg-primary-blue rounded-full flex items-center justify-center">
+                            <div
+                              className="
+                              w-5 h-5
+                              bg-primary-blue
+                              rounded-full
+                              flex items-center justify-center
+                              transition-transform duration-200
+                              group-hover:scale-105
+                            "
+                            >
                               <span className="text-white text-[10px] font-medium leading-none">
                                 {initials}
                               </span>
                             </div>
                           </div>
-                          <div className="text-foreground/90 dark:text-foreground/90 text-xs font-normal">
+                          <div className="text-foreground/90 dark:text-foreground/90 text-xs font-medium">
                             {email}
                           </div>
                         </div>
