@@ -73,24 +73,37 @@ export function EventSetup() {
   }
 
   return (
-    <div className="bg-card rounded-xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full">
-      <div className="text-foreground/50 text-base font-medium">
-        Getting started with Mavy
-      </div>
-      <h1 className="text-foreground/90 text-2xl font-semibold mt-2 font-crimson tracking-tight">
-        What kind of event do you want to setup
-      </h1>
+    <div
+      className="
+      grid grid-rows-[auto_1fr_auto]
+      min-h-[70vh]
+      max-h-[800px]
+      bg-card
+      rounded-xl
+      p-7
+      shadow-[0_4px_20px_rgba(0,0,0,0.05)]
+    "
+    >
+      {/* Header Section */}
+      <div className="space-y-2">
+        <div className="text-foreground/50 text-base font-medium">
+          Getting started with Mavy
+        </div>
+        <h1 className="text-foreground/90 text-2xl font-semibold font-crimson tracking-tight">
+          What kind of event do you want to setup
+        </h1>
 
-      {/* Progress Bar */}
-      <div className="mt-4 relative h-2">
-        <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
-        <div
-          className={`h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px] transition-all duration-300 ${progressWidth}`}
-        />
+        {/* Progress Bar */}
+        <div className="relative h-2 mt-2">
+          <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
+          <div
+            className={`h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px] transition-all duration-300 ${progressWidth}`}
+          />
+        </div>
       </div>
 
-      {/* Event Cards Grid */}
-      <div className="mt-8 grid grid-cols-2 gap-6">
+      {/* Event Cards Grid - will take remaining space */}
+      <div className="mt-8 grid grid-cols-2 gap-6 h-full">
         <div onClick={() => setSelectedEvent('Demo call with Mavy')}>
           <EventCard title="Demo call with Mavy" image="/demo-call.jpg" />
         </div>
