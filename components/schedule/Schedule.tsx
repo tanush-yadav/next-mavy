@@ -16,7 +16,7 @@ function convertTimeToMinutes(time12h: string) {
 
 function ScheduleHeader() {
   return (
-    <div className="flex justify-between items-center px-4 py-1">
+    <div className="flex justify-between items-center px-2 py-1">
       <div className="px-6">
         <div className="text-sm font-medium text-foreground/90">
           14th February, 2025
