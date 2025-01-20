@@ -16,7 +16,7 @@ function convertTimeToMinutes(time12h: string) {
 
 function ScheduleHeader() {
   return (
-    <div className="flex justify-between items-center px-2 py-1">
+    <div className="flex justify-between items-center px-2">
       <div className="px-6">
         <div className="text-sm font-medium text-foreground/90">
           14th February, 2025
@@ -79,7 +79,7 @@ export function Schedule() {
     <div
       className="
         grid grid-rows-[auto_1fr]
-        max-h-[clamp(500px,75vh,900px)]
+        max-h-[clamp(500px,70vh,900px)]
         bg-card
         rounded-xl
         shadow-[0px_4px_33.2px_0px_rgba(0,0,0,0.05)]
@@ -89,7 +89,7 @@ export function Schedule() {
       <ScheduleHeader />
 
       {/* Timeline with dynamic event placement */}
-      <div className="relative px-4 pb-8 py-2 h-full">
+      <div className="relative px-4 pb-4 py-2 h-full">
         <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-background via-primary-blue to-background" />
 
         <div className="h-full flex flex-col">
