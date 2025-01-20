@@ -75,14 +75,15 @@ export function EventSetup() {
   return (
     <div
       className="
-      grid grid-rows-[auto_1fr_auto]
-      min-h-[70vh]
-      max-h-[800px]
-      bg-card
-      rounded-xl
-      p-7
-      shadow-[0_4px_20px_rgba(0,0,0,0.05)]
-    "
+        relative
+        w-full
+        max-h-[clamp(500px,75vh,900px)]
+        bg-card
+        rounded-xl
+        p-7
+        shadow-[0_4px_20px_rgba(0,0,0,0.05)]
+        overflow-y-auto
+      "
     >
       {/* Header Section */}
       <div className="space-y-2">
@@ -97,13 +98,18 @@ export function EventSetup() {
         <div className="relative h-2 mt-2">
           <div className="w-full h-2 bg-foreground/10 opacity-50 rounded-[49px]" />
           <div
-            className={`h-2 absolute top-0 left-0 bg-[#1ac06b] rounded-[49px] transition-all duration-300 ${progressWidth}`}
+            className={`
+              h-2 absolute top-0 left-0 bg-[#1ac06b]
+              rounded-[49px] transition-all duration-300
+              ${progressWidth}
+            `}
           />
         </div>
       </div>
 
-      {/* Event Cards Grid - will take remaining space */}
-      <div className="mt-8 grid grid-cols-2 gap-6 h-full">
+      {/* Event Cards Grid */}
+      {/* Switch to a 1-column layout on smaller screens to avoid cutting content */}
+      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 h-full">
         <div onClick={() => setSelectedEvent('Demo call with Mavy')}>
           <EventCard title="Demo call with Mavy" image="/demo-call.jpg" />
         </div>

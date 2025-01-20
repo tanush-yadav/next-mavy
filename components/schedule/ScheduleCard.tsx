@@ -23,7 +23,6 @@ export function ScheduleCard({
         rounded-2xl
         flex items-start gap-3
         transition-all duration-200
-        hover:shadow-lg
         focus:outline-none focus:ring-2 focus:ring-primary-blue/20
         group
       `}
@@ -40,7 +39,6 @@ export function ScheduleCard({
                 : 'text-foreground opacity-70'
             }
             text-base font-medium tracking-wide
-            group-hover:opacity-95 transition-opacity duration-200
           `}
         >
           {title}
@@ -53,7 +51,6 @@ export function ScheduleCard({
                 : 'text-foreground opacity-50'
             }
             text-xs font-semibold
-            group-hover:opacity-75 transition-opacity duration-200
           `}
         >
           {time}
@@ -65,7 +62,6 @@ export function ScheduleCard({
             px-3 py-1
             bg-background
             rounded-full
-            hover:shadow-blue-200/50
             hover:bg-primary-light/90
             active:bg-primary-light
             transition-all duration-200
