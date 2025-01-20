@@ -89,7 +89,7 @@ export function Schedule() {
       <ScheduleHeader />
 
       {/* Timeline with dynamic event placement */}
-      <div className="relative px-4 pb-16 py-2 h-full">
+      <div className="relative px-4 pb-8 py-2 h-full">
         <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-background via-primary-blue to-background" />
 
         <div className="h-full flex flex-col">
