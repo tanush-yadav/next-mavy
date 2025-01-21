@@ -71,8 +71,8 @@ export function Sidebar() {
   ]
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-[219px] bg-sidebar-bg shadow-sm flex flex-col">
-      <div className="pl-10 pr-[70px] pt-10 flex flex-col gap-[60px] h-full">
+    <div className="fixed left-0 top-0 h-screen w-[14%] bg-sidebar-bg shadow-sm flex flex-col">
+      <div className="pl-10 pt-10 flex flex-col gap-15 h-full">
         {/* Navigation */}
         <div className="flex flex-col gap-4">
           {navItems.map((item) => (

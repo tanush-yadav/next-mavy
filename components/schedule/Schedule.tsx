@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 import { ScheduleCard } from './ScheduleCard'
 import { TimelineSegment } from './TimelineSegment'
 
@@ -39,6 +40,10 @@ function ScheduleHeader() {
 }
 
 export function Schedule() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [pxPerMinute, setPxPerMinute] = useState(0.5)
+  const CARD_HEIGHT = 80 // Height of each schedule card including padding
+
   // Sample event data
   const events = [
     {
@@ -75,8 +80,39 @@ export function Schedule() {
     endMinutes: convertTimeToMinutes(ev.end),
   }))
 
+  // Calculate total time span
+  const earliestStart = Math.min(
+    ...eventsWithMinutes.map((e) => e.startMinutes)
+  )
+  const latestEnd = Math.max(...eventsWithMinutes.map((e) => e.endMinutes))
+  const totalTimeSpan = latestEnd - earliestStart
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const containerHeight = containerRef.current.clientHeight
+    const headerHeight = 80 // Approximate header height
+    const availableHeight = containerHeight - headerHeight
+
+    // Total space needed for cards
+    const totalCardsHeight = eventsWithMinutes.length * CARD_HEIGHT
+
+    // Remaining space for gaps
+    const availableForGaps = availableHeight - totalCardsHeight
+
+    // Calculate optimal scale
+    const maxScale = 0.5 // 0.3px per minute (18px per hour)
+    const minScale = 0.05 // 0.05px per minute (3px per hour)
+
+    let scale = availableForGaps / totalTimeSpan
+    scale = Math.min(maxScale, Math.max(minScale, scale))
+
+    setPxPerMinute(scale)
+  }, [eventsWithMinutes.length, totalTimeSpan])
+
   return (
     <div
+      ref={containerRef}
       className="
         grid grid-rows-[auto_1fr]
         max-h-[clamp(500px,70vh,900px)]
@@ -89,19 +125,17 @@ export function Schedule() {
       <ScheduleHeader />
 
       {/* Timeline with dynamic event placement */}
-      <div className="relative px-4 pb-4 py-2 h-full">
+      <div className="relative px-4 pb-6 py-2 h-full">
         <div className="absolute left-8 top-0 bottom-0 w-[37px] opacity-10 bg-gradient-to-b from-background via-primary-blue to-background" />
 
         <div className="h-full flex flex-col">
           {eventsWithMinutes.map((event, idx) => {
-            // Calculate margin-top based on time-gap from previous event
-            let marginTop = 0
-            if (idx > 0) {
-              const gapInMinutes =
-                event.startMinutes - eventsWithMinutes[idx - 1].endMinutes
-              // e.g. 0.5px per minute difference
-              marginTop = Math.max(0, gapInMinutes) * 0.5
-            }
+            // Calculate gap from previous event or from earliest start time
+            const previousEnd =
+              idx > 0 ? eventsWithMinutes[idx - 1].endMinutes : earliestStart
+
+            const timeGap = event.startMinutes - previousEnd
+            const marginTop = Math.max(0, timeGap * pxPerMinute)
 
             return (
               <div key={event.title} className="relative" style={{ marginTop }}>
