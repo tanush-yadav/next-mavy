@@ -1,4 +1,12 @@
 import { DownArrow } from '@/components/icons/DownArrow'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 
 const PreferencesPage = () => {
   return (
@@ -20,36 +28,55 @@ const PreferencesPage = () => {
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   In-Person meeting
                 </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    30 min
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="30">
+                  <SelectTrigger className="w-[13%] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="15">15 min</SelectItem>
+                    <SelectItem value="30">30 min</SelectItem>
+                    <SelectItem value="45">45 min</SelectItem>
+                    <SelectItem value="60">60 min</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="h-full w-full p-4 bg-white rounded-xl justify-between items-center inline-flex">
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Virtual meeting
                 </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    30 min
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="30">
+                  <SelectTrigger className="w-[13%] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="15">15 min</SelectItem>
+                    <SelectItem value="30">30 min</SelectItem>
+                    <SelectItem value="45">45 min</SelectItem>
+                    <SelectItem value="60">60 min</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="h-full w-full p-4 bg-white rounded-xl justify-between items-center inline-flex">
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Buffer between virtual meetings
                 </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    None
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="None">
+                  <SelectTrigger className="w-[12%] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="None">None</SelectItem>
+                    <SelectItem value="15">15 min</SelectItem>
+                    <SelectItem value="30">30 min</SelectItem>
+                    <SelectItem value="45">45 min</SelectItem>
+                    <SelectItem value="60">60 min</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
@@ -64,33 +91,41 @@ const PreferencesPage = () => {
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Email
                 </div>
-                <div className="w-11 h-6 p-0.5 bg-[#f6f6f6] rounded-[44px] justify-end items-center gap-2 inline-flex">
-                  <div className="w-5 h-5 bg-[#16a570] rounded-full shadow-[0px_0px_10.199999809265137px_0px_rgba(27,193,108,0.37)]" />
-                </div>
+                <Switch defaultChecked className="bg-[#f6f6f6]" />
               </div>
 
               <div className="h-full w-full p-4 bg-white rounded-xl justify-between items-center inline-flex">
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Frequency
                 </div>
-                <div className="justify-start items-center gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    Every two days
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="2days">
+                  <SelectTrigger className="w-[130px] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="daily">Every day</SelectItem>
+                    <SelectItem value="2days">Every two days</SelectItem>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="h-full w-full p-4 bg-white rounded-xl justify-between items-center inline-flex">
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Limit
                 </div>
-                <div className="justify-start items-center gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    Twice
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="Twice">
+                  <SelectTrigger className="w-[12%] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Twice">Twice</SelectItem>
+                    <SelectItem value="Once">Once</SelectItem>
+                    <SelectItem value="None">None</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
@@ -105,21 +140,25 @@ const PreferencesPage = () => {
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Email
                 </div>
-                <div className="w-11 h-6 p-0.5 bg-[#f6f6f6] rounded-[44px] justify-end items-center gap-2 inline-flex">
-                  <div className="w-5 h-5 bg-[#16a570] rounded-full shadow-[0px_0px_10.199999809265137px_0px_rgba(27,193,108,0.37)]" />
-                </div>
+                <Switch defaultChecked className="bg-[#f6f6f6]" />
               </div>
 
               <div className="h-full w-full p-4 bg-white rounded-xl justify-between items-center inline-flex">
                 <div className="opacity-90 text-[#101010] text-base font-medium leading-tight">
                   Time
                 </div>
-                <div className="justify-start items-center gap-1 flex">
-                  <div className="opacity-90 text-[#101010] text-sm font-medium leading-tight">
-                    10 min
-                  </div>
-                  <DownArrow className="w-5 h-5" />
-                </div>
+                <Select defaultValue="10">
+                  <SelectTrigger className="w-[13%] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                    <SelectValue />
+                    <DownArrow className="w-5 h-5" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="5">5 min</SelectItem>
+                    <SelectItem value="10">10 min</SelectItem>
+                    <SelectItem value="15">15 min</SelectItem>
+                    <SelectItem value="20">20 min</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
