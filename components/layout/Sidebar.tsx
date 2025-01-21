@@ -6,6 +6,8 @@ import { HomeIcon } from '@/components/icons/HomeIcon'
 import { NetworkIcon } from '@/components/icons/NetworkIcon'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 interface NavItemProps {
@@ -13,17 +15,28 @@ interface NavItemProps {
   text: string
   active?: boolean
   onClick?: () => void
+  href?: string
+  subItems?: { text: string; href: string }[]
 }
 
-function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
+function NavItem({
+  icon,
+  text,
+  active = false,
+  onClick,
+  href,
+  subItems,
+}: NavItemProps) {
   const { theme } = useTheme()
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(active && !!subItems)
+  const pathname = usePathname()
 
   // Decide which icon component to render
   const IconComponent = (() => {
     switch (icon) {
       case 'calendar':
         return CalendarIcon
-      case 'config':
+      case 'settings':
         return ConfigIcon
       case 'network':
         return NetworkIcon
@@ -32,7 +45,6 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
     }
   })()
 
-  // Use #FFFFFF for dark mode, otherwise use the original logic
   const iconColor =
     theme === 'dark'
       ? '#FFFFFF'
@@ -40,11 +52,8 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
       ? 'hsl(var(--primary-blue))'
       : 'currentColor'
 
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
-    >
+  const content = (
+    <>
       <IconComponent color={iconColor} />
       <span
         className={`text-base font-inter ${
@@ -55,33 +64,80 @@ function NavItem({ icon, text, active = false, onClick }: NavItemProps) {
       >
         {text}
       </span>
-    </button>
+    </>
+  )
+
+  return (
+    <div>
+      {href ? (
+        <Link
+          href={href}
+          className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
+          onClick={() => {
+            if (subItems) setIsSubMenuOpen(!isSubMenuOpen)
+            onClick?.()
+          }}
+        >
+          {content}
+        </Link>
+      ) : (
+        <button
+          onClick={() => {
+            if (subItems) setIsSubMenuOpen(!isSubMenuOpen)
+            onClick?.()
+          }}
+          className={`flex items-center gap-2 ${active ? '' : 'opacity-60'}`}
+        >
+          {content}
+        </button>
+      )}
+
+      {subItems && isSubMenuOpen && (
+        <div className="ml-6 mt-2 flex flex-col gap-2">
+          {subItems.map((item) => (
+            <Link
+              key={item.text}
+              href={item.href}
+              className={`text-sm ${
+                pathname === item.href
+                  ? 'font-semibold text-primary-blue dark:text-white'
+                  : 'font-medium text-foreground/60 dark:text-white/60'
+              }`}
+            >
+              {item.text}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
 export function Sidebar() {
-  const [activeNav, setActiveNav] = useState('Home')
+  const pathname = usePathname()
   const { theme, setTheme } = useTheme()
 
   const navItems = [
-    { icon: 'home', text: 'Home' },
-    { icon: 'calendar', text: 'Calendar' },
-    { icon: 'network', text: 'Network' },
-    { icon: 'config', text: 'Config' },
+    { icon: 'home', text: 'Home', href: '/' },
+    { icon: 'calendar', text: 'Calendar', href: '/calendar' },
+    { icon: 'network', text: 'Network', href: '/network' },
+    {
+      icon: 'settings',
+      text: 'Settings',
+      href: '/settings',
+    },
   ]
 
   return (
     <div className="fixed left-0 top-0 h-screen w-[14%] bg-sidebar-bg shadow-sm flex flex-col">
       <div className="pl-10 pt-10 flex flex-col gap-15 h-full">
         {/* Navigation */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           {navItems.map((item) => (
             <NavItem
               key={item.text}
-              icon={item.icon}
-              text={item.text}
-              active={item.text === activeNav}
-              onClick={() => setActiveNav(item.text)}
+              {...item}
+              active={pathname.startsWith(item.href)}
             />
           ))}
         </div>
