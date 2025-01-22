@@ -1,0 +1,17 @@
+Match the Figma designs. Strive for pixel-perfection using Tailwind classes accurately.
+
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+
+Translate the above to relevant tailwind classes (not px values) and match the relevance with our tailwind config as well.
+
+Make mindful and precise designs as precise to figma as possible. Use shadcn/ui components as much as possible (all in components/ui folder)
+
+For any icon or logo, Define it in a tsx file, passing in color props, so it can be adjusted for dark mode.
+
+Default to Server Components for efficiency; add "use client" only where needed for hooks (useState, useEffect, etc).
+
+Keep TypeScript strict and maintain clean folder structures (e.g. app, components, lib).
+
+Employ relative imports and logical file organization to promote clarity and maintainability.
+
+Use types when making major changes to base shadcn components, as it could be used somewhere else too.

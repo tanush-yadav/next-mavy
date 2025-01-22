@@ -10,7 +10,7 @@ import { Switch } from '@/components/ui/switch'
 
 const PreferencesPage = () => {
   return (
-    <div className="w-full min-h-screen bg-background p-6">
+    <div className="w-full min-h-full bg-background px-6 py-2">
       <div className="max-w-2xl mx-auto">
         {/* Main Card */}
         <div className="h-full px-8 py-6 bg-card rounded-3xl flex flex-col gap-6">
@@ -124,7 +124,7 @@ const PreferencesPage = () => {
                 <div className="text-foreground/90 text-base font-medium  leading-tight">
                   Limit
                 </div>
-                <Select defaultValue="2days">
+                <Select defaultValue="Twice">
                   <SelectTrigger className="w-[12%] border-0 bg-transparent p-0 h-auto focus:ring-0">
                     <SelectValue className="text-foreground/90 text-sm font-medium  leading-tight" />
                     <DownArrow className="w-5 h-5" />
@@ -179,5 +179,4 @@ const PreferencesPage = () => {
     </div>
   )
 }
-
 export default PreferencesPage

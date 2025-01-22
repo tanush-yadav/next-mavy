@@ -8,10 +8,10 @@ export default function SettingsLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="max-h-full bg-background">
       <Sidebar />
-      <div className="min-h-screen bg-[#f6f6f6]">
-        <div className="max-w-[1280px] mx-auto p-8">{children}</div>
+      <div className="max-h-full bg-[#f6f6f6]">
+        <div className="max-w-screen mx-auto p-6">{children}</div>
       </div>
     </div>
   )
