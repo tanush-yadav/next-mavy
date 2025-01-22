@@ -169,7 +169,7 @@ export function AvailabilitySchedule() {
                   }
                   disabled={!day.enabled}
                 >
-                  <SelectTrigger className="w-[100px] h-10 border-black/10">
+                  <SelectTrigger className="w-[100px] h-10 border-black/10 border rounded-lg justify-center">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -190,7 +190,7 @@ export function AvailabilitySchedule() {
                   }
                   disabled={!day.enabled}
                 >
-                  <SelectTrigger className="w-[100px] h-10 border-black/10">
+                  <SelectTrigger className="w-[100px] h-10 rounded-lg border border-black/10 justify-center">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
