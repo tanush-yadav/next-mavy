@@ -102,16 +102,16 @@ const PreferencesPage = () => {
               </div>
 
               {/* Frequency */}
-              <div className="py-4 bg-card rounded-xl flex justify-between items-center">
-                <div className="text-foreground/90 text-base font-medium  leading-tight">
+              <div className="py-4 bg-card rounded-xl flex justify-between items-center whitespace-nowrap">
+                <div className="text-foreground/90 text-base font-medium leading-tight">
                   Frequency
                 </div>
                 <Select defaultValue="2days">
-                  <SelectTrigger className="w-[130px] border-0 bg-transparent p-0 h-auto focus:ring-0">
-                    <SelectValue className="text-foreground/90 text-sm font-medium  leading-tight" />
-                    <DownArrow className="w-5 h-5" />
+                  <SelectTrigger className="w-auto min-w-[80px] border-0 bg-transparent p-0 h-auto focus:ring-0 flex items-center gap-2">
+                    <SelectValue className="text-foreground/90 text-sm font-medium leading-tight " />
+                    <DownArrow className="w-5 h-5 flex-shrink-0" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent align="end" className="w-auto min-w-[140px]">
                     <SelectItem value="daily">Every day</SelectItem>
                     <SelectItem value="2days">Every two days</SelectItem>
                     <SelectItem value="weekly">Weekly</SelectItem>
@@ -161,7 +161,7 @@ const PreferencesPage = () => {
                   Time
                 </div>
                 <Select defaultValue="10">
-                  <SelectTrigger className="w-[100px] border-0 bg-transparent p-0 h-auto focus:ring-0">
+                  <SelectTrigger className="w-[12%] border-0 bg-transparent p-0 h-auto focus:ring-0">
                     <SelectValue className="text-foreground/90 text-sm font-medium  leading-tight" />
                     <DownArrow className="w-5 h-5" />
                   </SelectTrigger>

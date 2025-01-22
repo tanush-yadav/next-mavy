@@ -14,4 +14,4 @@ Keep TypeScript strict and maintain clean folder structures (e.g. app, component
 
 Employ relative imports and logical file organization to promote clarity and maintainability.
 
-Use types when making major changes to base shadcn components, as it could be used somewhere else too.
+Use variants when making major changes to base shadcn components, as it could be used somewhere else too.
