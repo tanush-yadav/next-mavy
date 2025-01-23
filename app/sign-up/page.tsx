@@ -23,10 +23,10 @@ export default function SignUpPage() {
         {/* Sign up card */}
         <div className="w-[695px] h-[361px] relative bg-black/80 rounded-[40px] opacity-90 overflow-hidden">
           <div className="w-[284px] left-[64px] top-[121px] absolute">
-            <span class="text-white text-[32px] font-semibold font-crimson leading-10">
+            <span className="text-white text-[32px] font-semibold font-crimson leading-10">
               Sign up <br />
             </span>
-            <span class="text-white/40 text-[32px] font-semibold font-crimson leading-10">
+            <span className="text-white/40 text-[32px] font-semibold font-crimson leading-10">
               to experience Scheduling Nirvana
             </span>
           </div>
