@@ -68,7 +68,7 @@ export function Schedule({ minHeight }: ScheduleProps) {
       time: '7:00PM - 8:00PM',
       start: '7:00PM',
       end: '8:00PM',
-    }
+    },
   ]
 
   // Convert each event's start/end to minutes for spacing logic
