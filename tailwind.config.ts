@@ -25,11 +25,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-        background: {
-          DEFAULT: 'hsl(var(--bg-primary))',
-          subtle: 'hsl(var(--bg-brand-subtle))',
-          subtler: 'hsl(var(--bg-brand-subtler))',
-        },
+        background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -40,8 +36,7 @@ const config: Config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--text-primary))',
-          brand: 'hsl(var(--text-brand-default))',
+          DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
           light: 'hsl(var(--primary-light))',
           blue: 'hsl(var(--primary-blue))',
