@@ -81,7 +81,7 @@ export function AnimatedCards() {
         }}
       >
         {duplicatedCards.map((card, index) => {
-          // Calculate the relative position considering the current scroll position
+          // Calculate the relative pxosition considering the current scroll position
           const relativePosition =
             (index - position + duplicatedCards.length) % duplicatedCards.length
 
@@ -91,8 +91,7 @@ export function AnimatedCards() {
               emoji={card.emoji}
               title={card.title}
               opacity={
-                // First 2 and last 3 visible cards should be inactive
-                relativePosition < 2 ||
+                relativePosition < 1 ||
                 relativePosition > duplicatedCards.length - 4
                   ? 30
                   : 100

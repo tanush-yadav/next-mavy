@@ -1,25 +1,9 @@
-'use client'
-
+import { GoogleIcon } from '@/components/icons/GoogleIcon'
+import { OutlookIcon } from '@/components/icons/OutlookIcon'
+import { AnimatedCards } from '@/components/sign-up/AnimatedCards'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 
-export default function SignUpPage() {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
-  const router = useRouter()
-
-  const handleOptionSelect = (option: string) => {
-    setSelectedOption(option)
-  }
-
-  const handleContinue = () => {
-    router.push('/')
-  }
-
-  const handleSkip = () => {
-    router.push('/')
-  }
-
+export default function PickAModePage() {
   return (
     <div className="min-h-screen w-full relative bg-black overflow-hidden">
       {/* Background image and overlay */}
@@ -35,84 +19,56 @@ export default function SignUpPage() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-4 px-4">
-        <div className="w-full max-w-[800px] h-[361px] relative bg-black/80 rounded-[40px] backdrop-blur-md overflow-hidden">
-          {/* Logo section */}
-          <div className="absolute left-[8%] top-8 flex items-center gap-1">
-            <Image
-              src="/mavex.png"
-              alt="Mavex logo"
-              width={34}
-              height={36}
-              className="object-contain"
-            />
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-4">
+        {/* Sign up card */}
+        <div className="w-[695px] h-[361px] relative bg-black/80 rounded-[40px] opacity-90 overflow-hidden">
+          <div className="w-[284px] left-[64px] top-[121px] absolute">
+            <span className="text-white text-[32px] font-semibold font-crimson leading-10">
+              Sign up <br />
+            </span>
+            <span className="text-white/40 text-[32px] font-semibold font-crimson leading-10">
+              to experience Scheduling Nirvana
+            </span>
           </div>
-
-          {/* Content wrapper for better responsiveness */}
-          <div className="flex flex-col gap-24 lg:flex-row h-full pt-24 px-[8%]">
-            {/* Question text */}
-            <div className="lg:w-[40%]">
-              <span className="text-white text-[32px] font-crimson leading-[40px]">
-                What defines <br />
-                you best?
-              </span>
-            </div>
-
-            {/* Selection buttons grid */}
-            <div className="lg:w-[60%] h-[72%] grid grid-cols-2 gap-x-4 mt-8 lg:mt-0">
-              {[
-                'Sales',
-                'Marketing',
-                'Recruitment',
-                'Founder',
-                'Tech',
-                'Student',
-              ].map((label) => (
-                <button
-                  key={label}
-                  onClick={() => handleOptionSelect(label)}
-                  className={`min-w-fit px-6 h-10 py-2 bg-black/40 rounded-xl border
-                    ${selectedOption === label ? 'border-white' : 'border-white/20'}
-                    backdrop-blur-sm hover:border-white/40 transition-all duration-200
-                    flex items-center justify-center`}
-                >
-                  <span className="text-white/70 text-sm font-medium whitespace-nowrap">
-                    {label}
-                  </span>
-                </button>
-              ))}
-            </div>
+          <div className="left-[428px] top-[141px] absolute flex-col justify-start items-start gap-4 inline-flex">
+            <button className="self-stretch px-6 py-2 bg-white rounded-xl shadow-[0px_1px_1px_0px_rgba(0,0,0,0.17)] justify-center items-center gap-2.5 inline-flex overflow-hidden">
+              <GoogleIcon className="w-6 h-6" />
+              <div className="text-black text-sm font-medium font-sans">
+                Sign in with Google
+              </div>
+            </button>
+            <button className="self-stretch px-4 py-2 bg-white rounded-xl shadow-[0px_1px_1px_0px_rgba(0,0,0,0.17)] justify-center items-center gap-2.5 inline-flex overflow-hidden">
+              <OutlookIcon className="w-6 h-6" />
+              <div className="text-black text-sm font-medium font-sans">
+                Sign in with Outlook
+              </div>
+            </button>
           </div>
-
-          {/* Continue button */}
-          {selectedOption && (
-            <div className="absolute left-[8%] bottom-[100px]">
-              <button
-                onClick={handleContinue}
-                className="w-[158px] h-11 px-6 py-3 bg-white rounded-[52px]
-                       shadow-[0px_0px_4px_4px_rgba(255,255,255,0.15)]
-                       flex justify-center items-center transition-transform hover:scale-[1.02]"
-              >
-                <span className="opacity-90 text-[#101010] text-sm font-semibold font-geist leading-tight">
-                  continue
-                </span>
-              </button>
+          <div className="left-[489px] top-[104px] absolute opacity-70 text-white text-sm font-medium font-sans">
+            Pick a mode
+          </div>
+          <div className="left-[64px] top-[29px] absolute justify-start items-center gap-1 inline-flex">
+            <div className="w-8 h-[29px] relative">
+              <img
+                className="w-[34px] h-9 left-[-2px] top-[-4px] absolute"
+                src="/mavex.png"
+                alt="Mavex logo"
+                width={34}
+                height={36}
+              />
             </div>
-          )}
+            {/* <div className="text-white/90 text-base font-semibold leading-normal">
+              Mavex
+            </div> */}
+          </div>
         </div>
 
-        {/* Skip button */}
-        <button
-          onClick={handleSkip}
-          className="absolute bottom-10 left-0 w-full group"
-        >
-          <div
-            className="flex items-center justify-center gap-2 text-white/50 text-sm font-medium
-                        group-hover:text-white/70 transition-colors duration-200"
-          >
-            Skip <span>-></span>
+        {/* Animated cards */}
+        <div className="absolute bottom-10 left-0 w-full overflow-hidden">
+          <div className="px-7">
+            <AnimatedCards />
           </div>
-        </button>
+        </div>
       </div>
     </div>
   )
