@@ -1,0 +1,29 @@
+/**
+ * Do not edit directly
+ * Generated on Fri, 24 Jan 2025 07:44:22 GMT
+ */
+
+:root {
+  --neutral_0: #ffffff;
+  --neutral_100: #f6f6f6;
+  --neutral_900: #101010;
+  --neutral_1000: #000000;
+  --alpha_netural_alpha_neutral_light_900: rgba(255, 255, 255, 0.9000);
+  --alpha_netural_alpha_neutral_light_800: rgba(255, 255, 255, 0.7000);
+  --alpha_netural_alpha_neutral_light_700: rgba(255, 255, 255, 0.5500);
+  --alpha_netural_alpha_neutral_light_600: rgba(255, 255, 255, 0.3000);
+  --alpha_netural_alpha_neutral_light_500: rgba(255, 255, 255, 0.2000);
+  --alpha_netural_alpha_neutral_light_400: rgba(255, 255, 255, 0.1000);
+  --alpha_netural_alpha_neutral_light_300: rgba(255, 255, 255, 0.0500);
+  --alpha_dark_alpha_neutral_dark_900: rgba(0, 0, 0, 0.9000);
+  --alpha_dark_alpha_neutral_dark_800: rgba(0, 0, 0, 0.7000);
+  --alpha_dark_alpha_neutral_dark_700: rgba(0, 0, 0, 0.5500);
+  --alpha_dark_alpha_neutral_dark_600: rgba(0, 0, 0, 0.3000);
+  --alpha_dark_alpha_neutral_dark_500: rgba(0, 0, 0, 0.2000);
+  --alpha_dark_alpha_neutral_dark_400: rgba(0, 0, 0, 0.1000);
+  --alpha_dark_alpha_neutral_dark_300: rgba(0, 0, 0, 0.0500);
+  --blue_100: #e3e7ec;
+  --blue_300: #c1dbff;
+  --blue_500: #1575d2;
+  --blue_900: #151617;
+}
