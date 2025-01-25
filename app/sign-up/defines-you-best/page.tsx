@@ -106,11 +106,8 @@ export default function SignUpPage() {
           onClick={handleSkip}
           className="absolute bottom-10 left-0 w-full group"
         >
-          <div
-            className="flex items-center justify-center gap-2 text-white/50 text-sm font-medium
-                        group-hover:text-white/70 transition-colors duration-200"
-          >
-            Skip <span>-></span>
+          <div className="flex items-center justify-center gap-2 text-white/50 text-sm font-medium group-hover:text-white/70 transition-colors duration-200">
+            Skip <span>&rarr;</span>
           </div>
         </button>
       </div>
