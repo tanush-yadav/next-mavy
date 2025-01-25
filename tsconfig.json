@@ -33,7 +33,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "./custom-tailwind-config/tailwind.config.js"
-, "config.js"  ],
+, "config.js", "build-tokens.mjs"  ],
   "exclude": [
     "node_modules"
   ]

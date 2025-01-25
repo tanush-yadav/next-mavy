@@ -4,7 +4,6 @@ import { CalendarIcon } from '@/components/icons/CalendarIcon'
 import { ConfigIcon } from '@/components/icons/ConfigIcon'
 import { HomeIcon } from '@/components/icons/HomeIcon'
 import { NetworkIcon } from '@/components/icons/NetworkIcon'
-import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -118,8 +117,8 @@ export function Sidebar() {
   const { theme, setTheme } = useTheme()
 
   const navItems = [
-    { icon: 'home', text: 'Home', href: '/' },
-    { icon: 'calendar', text: 'Calendar', href: '/calendar' },
+    { icon: 'home', text: 'Home', href: '/dashboard' },
+    { icon: 'calendar', text: 'Calendar', href: '/upcoming-events' },
     { icon: 'network', text: 'Network', href: '/network' },
     {
       icon: 'settings',
@@ -147,7 +146,7 @@ export function Sidebar() {
         </div>
 
         {/* Theme Toggle */}
-        <button
+        {/* <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           className="mt-auto mb-8 flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
         >
@@ -159,7 +158,7 @@ export function Sidebar() {
           <span className="text-sm font-medium text-foreground">
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </span>
-        </button>
+        </button> */}
       </div>
     </div>
   )

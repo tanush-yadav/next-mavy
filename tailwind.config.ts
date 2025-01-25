@@ -27,6 +27,66 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        neutral: {
+          0: '#ffffff',
+          100: '#f6f6f6',
+          900: '#101010',
+          1000: '#000000',
+        },
+        alphaNeutralLight: {
+          900: 'rgba(255, 255, 255, 0.9000)',
+          800: 'rgba(255, 255, 255, 0.7000)',
+          700: 'rgba(255, 255, 255, 0.5500)',
+          600: 'rgba(255, 255, 255, 0.3000)',
+          500: 'rgba(255, 255, 255, 0.2000)',
+          400: 'rgba(255, 255, 255, 0.1000)',
+          300: 'rgba(255, 255, 255, 0.0500)',
+        },
+        alphaNeutralDark: {
+          900: 'rgba(0, 0, 0, 0.9000)',
+          800: 'rgba(0, 0, 0, 0.7000)',
+          700: 'rgba(0, 0, 0, 0.5500)',
+          600: 'rgba(0, 0, 0, 0.3000)',
+          500: 'rgba(0, 0, 0, 0.2000)',
+          400: 'rgba(0, 0, 0, 0.1000)',
+          300: 'rgba(0, 0, 0, 0.0500)',
+        },
+        blue: {
+          100: '#e3e7ec',
+          300: '#c1dbff',
+          500: '#1575d2',
+          900: '#151617',
+        },
+        text: {
+          primary: 'rgba(0, 0, 0, 0.9000)',
+          secondary: 'rgba(0, 0, 0, 0.7000)',
+          tertiary: 'rgba(0, 0, 0, 0.5500)',
+          brand: {
+            DEFAULT: '#1575d2',
+          },
+          inverse: {
+            primary: 'rgba(255, 255, 255, 0.9000)',
+            secondary: 'rgba(255, 255, 255, 0.7000)',
+            tertiary: 'rgba(255, 255, 255, 0.5500)',
+          },
+        },
+        bg: {
+          primary: '#f6f6f6',
+          brandSubtler: '#e3e7ec',
+          brandSubtle: '#c1dbff',
+          secondary: '#ffffff',
+        },
+        icon: {
+          neutral: {
+            active: '#101010',
+            inactive: 'rgba(0, 0, 0, 0.5500)',
+          },
+          primaryBrand: '#1575d2',
+        },
+        border: {
+          inactive: 'rgba(0, 0, 0, 0.1000)',
+          active: 'rgba(0, 0, 0, 0.9000)',
+        },
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -41,17 +101,6 @@ const config: Config = {
           light: 'hsl(var(--primary-light))',
           blue: 'hsl(var(--primary-blue))',
           'blue-light': 'hsl(var(--primary-blue-light))',
-        },
-        sidebar: {
-          bg: 'hsl(var(--sidebar-bg))',
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -69,7 +118,17 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        border: 'hsl(var(--border))',
+        sidebar: {
+          bg: 'hsl(var(--sidebar-bg))',
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
+        },
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         chart: {

@@ -13,11 +13,11 @@ export default function SignUpPage() {
   }
 
   const handleContinue = () => {
-    router.push('/')
+    router.push('/dashboard')
   }
 
   const handleSkip = () => {
-    router.push('/')
+    router.push('/dashboard')
   }
 
   return (
