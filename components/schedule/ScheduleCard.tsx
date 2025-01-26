@@ -18,7 +18,7 @@ export function ScheduleCard({
         ${
           isActive
             ? 'bg-gradient-to-r from-primary-blue to-primary-blue-light'
-            : 'bg-gradient-to-r from-primary-blue/10 to-background'
+            : 'bg-gradient-to-r from-primary-blue/10 to-white'
         }
         rounded-2xl
         flex items-start gap-3
