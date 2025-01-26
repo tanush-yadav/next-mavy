@@ -72,7 +72,11 @@ export default function SignUpPage() {
                   key={label}
                   onClick={() => handleOptionSelect(label)}
                   className={`min-w-fit px-6 h-10 py-2 bg-black/40 rounded-xl border
-                    ${selectedOption === label ? 'border-white' : 'border-white/20'}
+                    ${
+                      selectedOption === label
+                        ? 'border-white'
+                        : 'border-white/20'
+                    }
                     backdrop-blur-sm hover:border-white/40 transition-all duration-200
                     flex items-center justify-center`}
                 >
@@ -93,7 +97,7 @@ export default function SignUpPage() {
                        shadow-[0px_0px_4px_4px_rgba(255,255,255,0.15)]
                        flex justify-center items-center transition-transform hover:scale-[1.02]"
               >
-              <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent opacity-90">
+                <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent opacity-90">
                   continue
                 </span>
               </button>

@@ -76,23 +76,6 @@ export default function UpcomingEvents() {
           <div className="text-sm font-medium opacity-90">{event.title}</div>
           <div className="text-sm font-medium opacity-60">{event.time}</div>
         </div>
-        {event.isActive && (
-          <button
-            className="
-            px-3 py-1
-            bg-background
-            rounded-full
-            hover:bg-primary-light/90
-            active:bg-primary-light
-            transition-all duration-200
-            focus:outline-none focus:ring-2 focus:ring-primary-blue/20
-          "
-        >
-          <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent opacity-90">
-            Join meeting
-          </span>
-        </button>
-        )}
       </div>
     </div>
   )
@@ -124,10 +107,7 @@ export default function UpcomingEvents() {
         <EventSection title="Thursday, Nov 15" events={events.later} />
       </div>
 
-      <Sheet
-        open={!!selectedEvent}
-        onOpenChange={() => setSelectedEvent(null)}
-      >
+      <Sheet open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
         <SheetContent side="right" className="!w-[30%] p-0">
           {selectedEvent && <EventDetails event={selectedEvent} />}
         </SheetContent>

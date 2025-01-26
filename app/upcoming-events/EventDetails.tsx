@@ -70,6 +70,25 @@ export function EventDetails({ event }: EventDetailsProps) {
           </p>
 
           <div className="h-px bg-foreground/5" />
+
+          <div className="flex justify-center items-center">
+            <button
+              className="
+            border
+            px-3 py-1
+            bg-background
+            rounded-full
+            hover:bg-primary-light/90
+            active:bg-primary-light
+            transition-all duration-200
+            focus:outline-none focus:ring-2 focus:ring-primary-blue/20
+          "
+            >
+              <span className="text-sm font-semibold leading-tight bg-gradient-to-r from-foreground to-primary-blue bg-clip-text text-transparent opacity-90">
+                Join meeting
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

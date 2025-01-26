@@ -93,6 +93,7 @@ export function Schedule({ minHeight }: ScheduleProps) {
         rounded-xl
         shadow-[0px_4px_33.2px_0px_rgba(0,0,0,0.05)]
         max-h-[clamp(500px,75vh,900px)]
+        max-w-[420px]
       "
     >
       <ScheduleHeader />

@@ -119,7 +119,7 @@ export function Sidebar() {
   const navItems = [
     { icon: 'home', text: 'Home', href: '/dashboard' },
     { icon: 'calendar', text: 'Calendar', href: '/upcoming-events' },
-    { icon: 'network', text: 'Network', href: '/network' },
+    // { icon: 'network', text: 'Network', href: '/network' },
     {
       icon: 'settings',
       text: 'Settings',
